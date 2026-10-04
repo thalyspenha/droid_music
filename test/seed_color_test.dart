@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hammm_music/theme/app_theme.dart';
+import 'package:droid_music/theme/app_theme.dart';
 
 void main() {
   group('seedColorFromPixels', () {

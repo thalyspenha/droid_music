@@ -1,6 +1,6 @@
 # Módulos
 
-O projeto é um único módulo Flutter/Dart (`hammm_music`, `pubspec.yaml`), sem monorepo, sem múltiplos pacotes internos e sem workspace. Não há separação em `packages/*` nem módulos Gradle além do padrão `android/app`. A organização abaixo é por pasta/responsabilidade dentro de `lib/`.
+O projeto é um único módulo Flutter/Dart (`droid_music`, `pubspec.yaml`), sem monorepo, sem múltiplos pacotes internos e sem workspace. Não há separação em `packages/*` nem módulos Gradle além do padrão `android/app`. A organização abaixo é por pasta/responsabilidade dentro de `lib/`.
 
 ## `lib/main.dart`
 
@@ -10,7 +10,7 @@ Ponto de entrada. Responsabilidades:
 - Força orientação retrato (`portraitUp`/`portraitDown`).
 - Inicializa `audio_service` via `initAudioService()`.
 - Cria o `ChangeNotifierProvider<PlayerProvider>` raiz.
-- Define `HammmApp` (`MaterialApp`, tema único `AppTheme.dark`, tela inicial `HomeScreen`).
+- Define `DroidMusicApp` (`MaterialApp`, tema único `AppTheme.dark`, tela inicial `HomeScreen`).
 - No primeiro frame pós-build, solicita permissão de mídia e, se concedida, carrega a biblioteca de músicas.
 - Observa o ciclo de vida (`WidgetsBindingObserver`): ao voltar para o primeiro plano, chama `PlayerProvider.refreshPermission()`.
 - Escuta `PlayerProvider.errors` e mostra cada mensagem como SnackBar via `scaffoldMessengerKey` do `MaterialApp`.
@@ -49,7 +49,7 @@ Entidade mutável (não `final`) representando uma playlist definida pelo usuár
 ### `initAudioService()`
 Função top-level que inicializa `AudioService.init(...)` do pacote `audio_service`, configurando canal de notificação Android (`com.hammm.music.channel.audio`), ícone e cor da notificação.
 
-### `HammmAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler`
+### `DroidAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler`
 Encapsula um `AudioPlayer` (pacote `just_audio`) e traduz seus eventos para o modelo `audio_service` (`PlaybackState`, `MediaItem`, `queue`). Expõe:
 - `setPlaylist(items, initialIndex)` — carrega a fila com `AudioPlayer.setAudioSources` e inicia reprodução (sem efeito com lista vazia). `queue` e `mediaItem` são atualizados a partir de `sequenceStateStream` (ordem efetiva e `currentSource.tag`). A fila só é reenviada à `MediaSession` quando a sequência efetiva muda (`_lastQueueSources`), não a cada troca de faixa. Estados transitórios inconsistentes do `sequenceStateStream` (índices de shuffle/atual da fila anterior ao carregar uma nova com shuffle ligado) são ignorados (`_isConsistent`) — sem isso, `effectiveSequence` lançava `RangeError`.
 - `play/pause/stop/seek/skipToNext/skipToPrevious/skipToQueueItem` — overrides de `BaseAudioHandler`. `stop()` não chama `super.stop()` (conflito com o `pipe` de `playbackState`); `skipToQueueItem` converte o índice da fila exibida para a ordem original.

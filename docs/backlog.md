@@ -29,7 +29,7 @@ Descartado: "sessão de áudio não configurada" — o `just_audio` já usa `Aud
 
 ### Testes que faltam
 - Ordenação + filtro de busca (`_applySortAndFilter`) — extrair para função pura e testar.
-- `HammmAudioHandler`: conversão de índices com shuffle, `stop()`, rewind ao completar a fila, "anterior" com >3 s — exigiria mock de `AudioPlayer`.
+- `DroidAudioHandler`: conversão de índices com shuffle, `stop()`, rewind ao completar a fila, "anterior" com >3 s — exigiria mock de `AudioPlayer`.
 - Reconciliação por caminho aplicada ao estado do provider (hoje só a função pura `remapIdsByPath` é testada).
 
 ## Não aplicável ao escopo atual

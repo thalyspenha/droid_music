@@ -142,7 +142,7 @@ class _Header extends StatelessWidget {
                   fontWeight: FontWeight.w800,
                   letterSpacing: compact ? -0.5 : -1.2,
                 ),
-                child: const Text('Hammm'),
+                child: const Text('Droid Music'),
               ),
               if (!compact) ...[
                 const SizedBox(width: 10),

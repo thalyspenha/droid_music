@@ -12,8 +12,8 @@ Busca explícita realizada e sem resultado:
 ## Plataforma alvo
 
 - **Somente Android** (`flutter_launcher_icons: android: true, ios: false` em `pubspec.yaml`). Não há diretório `ios/`, `web/`, `macos/`, `windows/` ou `linux/` no repositório — apenas `android/`.
-- **Application ID**: `com.hammm.music` (`android/app/build.gradle`).
-- **Nome do app**: "Hammm" (`AndroidManifest.xml`, `android:label`).
+- **Application ID**: `com.hammm.music` (`android/app/build.gradle`). Mantido do nome antigo (Hammm) ao renomear o app para Droid Music — trocar faria o Android tratar como outro app e perder favoritos/playlists salvos. Pelo mesmo motivo, `MethodChannel` `com.hammm.music/platform` e canal de notificação `com.hammm.music.channel.audio` não mudaram.
+- **Nome do app**: "Droid Music" (`AndroidManifest.xml`, `android:label`).
 
 ## Build (`android/app/build.gradle`)
 

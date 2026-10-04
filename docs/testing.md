@@ -29,7 +29,7 @@ flutter test
 
 ## Cobertura
 
-- Cobertura restrita a `lib/models/` e a funções puras top-level (ex.: `orphanIdsToPrune`, `pickArtworkUrl`, `remapIdsByPath`, marcadas `@visibleForTesting`). A classe `PlayerProvider`, o `HammmAudioHandler` e as telas **não têm testes** — exigiriam mocks de `on_audio_query`, `audio_service`, `just_audio`, `shared_preferences` e `permission_handler`, ou testes de widget/integração rodando em ambiente com plugins registrados.
+- Cobertura restrita a `lib/models/` e a funções puras top-level (ex.: `orphanIdsToPrune`, `pickArtworkUrl`, `remapIdsByPath`, marcadas `@visibleForTesting`). A classe `PlayerProvider`, o `DroidAudioHandler` e as telas **não têm testes** — exigiriam mocks de `on_audio_query`, `audio_service`, `just_audio`, `shared_preferences` e `permission_handler`, ou testes de widget/integração rodando em ambiente com plugins registrados.
 - Não identificado nenhum framework de teste E2E (ex. `patrol`, `integration_test` do próprio Flutter) configurado.
 - Não há relatório de cobertura (`coverage/lcov.info`) gerado/versionado.
 
@@ -40,7 +40,7 @@ Com base nas regras de negócio levantadas em [business-rules.md](./business-rul
 - `PlayerProvider._applySortAndFilter()` — ordenação + filtro de busca combinados.
 - `PlayerProvider.playSong()` / resolução de fila de reprodução.
 - `PlayerProvider.getPlaylistSongs()` / `_pruneOrphans()` — resolução e persistência da limpeza (a decisão de quais IDs podar já é testada via `orphanIdsToPrune`).
-- `HammmAudioHandler` — conversão de índices com shuffle (`skipToQueueItem`, `queueIndex`), `stop()` e rewind ao completar a fila.
+- `DroidAudioHandler` — conversão de índices com shuffle (`skipToQueueItem`, `queueIndex`), `stop()` e rewind ao completar a fila.
 - Lógica de sleep timer (`setSleepTimer`/`cancelSleepTimer`) — uso de `Timer`/`Timer.periodic`.
 - `_resolveArtworkUrl()`/`_paletteFromUrl()` — requisições HTTP, cache negativo com TTL e descarte de cor de faixa antiga (a escolha do resultado já é testada via `pickArtworkUrl`).
 - Fluxo de permissão (`requestPermission()`/`isPermissionPermanentlyDenied`) — depende de `permission_handler`, não testável sem mock de platform channel.

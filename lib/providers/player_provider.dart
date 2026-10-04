@@ -115,7 +115,7 @@ Set<int> orphanIdsToPrune(Set<int> referenced, Set<int> valid) {
 }
 
 class PlayerProvider extends ChangeNotifier {
-  final HammmAudioHandler _handler;
+  final DroidAudioHandler _handler;
   final OnAudioQuery _audioQuery = OnAudioQuery();
 
   List<Song> _songs = [];

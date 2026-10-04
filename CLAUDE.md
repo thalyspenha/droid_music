@@ -1,8 +1,8 @@
-# hammm_music
+# droid_music
 
 ## Contexto essencial
 
-Hammm Music é um player de música **local e offline** para Android, em Flutter. Não há backend, conta de usuário ou streaming — o app lê a biblioteca de áudio do próprio dispositivo (`MediaStore`) e reproduz os arquivos localmente. A única chamada de rede é para a iTunes Search API, usada apenas para buscar capas de álbum em alta resolução (feature acessória, com fallback gracioso).
+Droid Music é um player de música **local e offline** para Android, em Flutter. Não há backend, conta de usuário ou streaming — o app lê a biblioteca de áudio do próprio dispositivo (`MediaStore`) e reproduz os arquivos localmente. A única chamada de rede é para a iTunes Search API, usada apenas para buscar capas de álbum em alta resolução (feature acessória, com fallback gracioso).
 
 ## Stack
 
@@ -17,7 +17,7 @@ Hammm Music é um player de música **local e offline** para Android, em Flutter
 ## Arquitetura resumida
 
 ```
-main.dart → PlayerProvider (ChangeNotifier único) → HammmAudioHandler (just_audio + audio_service)
+main.dart → PlayerProvider (ChangeNotifier único) → DroidAudioHandler (just_audio + audio_service)
                      ↓
         screens/ (Home, Player, Playlists, PlaylistDetail, Queue)
                      ↓
@@ -38,7 +38,7 @@ Sem camada de repositório/DAO: o `PlayerProvider` acessa diretamente `on_audio_
 - Permissão de mídia: pedir **só** a da versão do Android (`Permission.audio` no 13+, `Permission.storage` abaixo, via `MethodChannel` `com.hammm.music/platform` em `MainActivity.kt`) — não reintroduzir fallback entre as duas (gera "negada permanentemente" falso).
 - Mudou a regra de escolha de capa (`pickArtworkUrl`/busca no iTunes)? Incrementar `_artworkCacheVersion` para descartar o cache salvo com a regra antiga.
 - Capa do iTunes: não buscar sem artista conhecido (`Song.hasKnownArtist`) e só aceitar resultado validado por `pickArtworkUrl()`. Callbacks assíncronos ligados à faixa atual (ex.: cor de destaque) devem checar `_currentSong?.id` depois de cada `await`.
-- `HammmAudioHandler.stop()` não pode chamar `super.stop()` (`StateError` por causa do `pipe` em `playbackState`).
+- `DroidAudioHandler.stop()` não pode chamar `super.stop()` (`StateError` por causa do `pipe` em `playbackState`).
 - Escritas em favoritos/playlists (`toggleFavorite`, `createPlaylist`, etc.) aguardam o load inicial do `SharedPreferences` (`_favoritesLoaded`/`_playlistsLoaded`) antes de mutar estado — não remover esse `await` ao editar esses métodos.
 - Build de release atualmente assina com a chave de **debug** (`android/app/build.gradle`) — não é keystore de produção. Ver [`docs/infrastructure.md`](./docs/infrastructure.md) antes de qualquer publicação.
 - Testes unitários cobrem só `lib/models/` e funções puras top-level (ex.: `orphanIdsToPrune`, `pickArtworkUrl`, `remapIdsByPath`). `PlayerProvider`/telas não têm testes (exigiriam mock de plugins de plataforma). Ver [`docs/testing.md`](./docs/testing.md).
@@ -58,7 +58,7 @@ Documentação detalhada e verificada contra o código atual está em [`/docs`](
 - [`architecture.md`](./docs/architecture.md) — arquitetura, camadas, fluxo de dados
 - [`modules.md`](./docs/modules.md) — responsabilidade de cada arquivo/módulo
 - [`database.md`](./docs/database.md) — persistência local (`shared_preferences`) e `MediaStore`
-- [`api.md`](./docs/api.md) — superfície pública de `PlayerProvider`/`HammmAudioHandler`
+- [`api.md`](./docs/api.md) — superfície pública de `PlayerProvider`/`DroidAudioHandler`
 - [`business-rules.md`](./docs/business-rules.md) — regras de negócio extraídas do código
 - [`integrations.md`](./docs/integrations.md) — iTunes Search API e integrações com o Android
 - [`infrastructure.md`](./docs/infrastructure.md) — build Android, assinatura, permissões

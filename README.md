@@ -1,4 +1,4 @@
-# Hammm Music
+# Droid Music
 
 Player de música **local e offline** para Android, feito em Flutter. Sem streaming, sem conta, sem internet obrigatória — toca os arquivos de áudio que já estão no aparelho.
 
@@ -46,7 +46,7 @@ lib/
 ├── main.dart          # bootstrap e injeção do PlayerProvider
 ├── models/            # Song, Playlist
 ├── providers/         # PlayerProvider (estado global único)
-├── services/          # HammmAudioHandler (just_audio + audio_service)
+├── services/          # DroidAudioHandler (just_audio + audio_service)
 ├── screens/           # Home, Player, Playlists, PlaylistDetail, Queue
 ├── widgets/           # MiniPlayer, SongTile, GradientAlbumArt/VinylAlbumArt
 └── theme/             # AppTheme (paleta e ThemeData)

@@ -4,12 +4,12 @@ import 'package:flutter/foundation.dart' show debugPrint, listEquals;
 import 'package:just_audio/just_audio.dart';
 import '../theme/app_theme.dart';
 
-Future<HammmAudioHandler> initAudioService() async {
+Future<DroidAudioHandler> initAudioService() async {
   return await AudioService.init(
-    builder: () => HammmAudioHandler(),
+    builder: () => DroidAudioHandler(),
     config: const AudioServiceConfig(
       androidNotificationChannelId: 'com.hammm.music.channel.audio',
-      androidNotificationChannelName: 'Hammm Music',
+      androidNotificationChannelName: 'Droid Music',
       androidNotificationOngoing: true,
       androidStopForegroundOnPause: true,
       androidNotificationIcon: 'drawable/ic_notification',
@@ -18,7 +18,7 @@ Future<HammmAudioHandler> initAudioService() async {
   );
 }
 
-class HammmAudioHandler extends BaseAudioHandler
+class DroidAudioHandler extends BaseAudioHandler
     with QueueHandler, SeekHandler {
   // `maxSkipsOnError`: faixa que falha ao carregar (arquivo corrompido,
   // formato não suportado) é pulada automaticamente; após esse número de
@@ -38,7 +38,7 @@ class HammmAudioHandler extends BaseAudioHandler
   // não recarregar a fila; aplicada a cada `mediaItem` emitido.
   final _artUris = <String, Uri>{};
 
-  HammmAudioHandler() {
+  DroidAudioHandler() {
     // Desde o just_audio 0.10 os erros de reprodução vão para `errorStream`
     // (não mais como evento de erro deste stream), inclusive o de
     // carregamento da faixa inicial.

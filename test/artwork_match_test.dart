@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hammm_music/providers/player_provider.dart';
+import 'package:droid_music/providers/player_provider.dart';
 
 Map<String, dynamic> _result(String artist, String track) => {
       'artistName': artist,

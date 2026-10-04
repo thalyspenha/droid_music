@@ -30,7 +30,7 @@ A "API pública" real deste projeto é a **superfície de métodos do `PlayerPro
 | `speed` | `double` | Velocidade de reprodução |
 | `paletteAccent` | `Color?` | Cor dominante extraída da capa da faixa atual |
 | `currentAccent` | `Color` | Cor de destaque da faixa atual: `paletteAccent` ou, sem ela, `songAccentColor()`; `AppTheme.accent` sem faixa. Usada pelo player, pelo mini player e pelo `SongTile` da faixa atual |
-| `errors` | `Stream<String>` (broadcast) | Mensagens de erro para o usuário (hoje: falha ao tocar); exibidas como SnackBar por `HammmApp` |
+| `errors` | `Stream<String>` (broadcast) | Mensagens de erro para o usuário (hoje: falha ao tocar); exibidas como SnackBar por `DroidMusicApp` |
 | `hasSleepTimer` | `bool` | Se há timer de desligamento ativo |
 | `sleepTimerRemaining` | `ValueListenable<Duration?>` | Tempo restante do sleep timer, atualizado a cada segundo sem `notifyListeners()` |
 | `currentQueue` | `List<MediaItem>` | Fila de reprodução atual |
@@ -54,7 +54,7 @@ A "API pública" real deste projeto é a **superfície de métodos do `PlayerPro
 | `skipToQueueItem(int index)` | `Future<void>` | Pula para item específico da fila (`index` na ordem exibida em `currentQueue`, já considerando shuffle) |
 | `removeFromQueue(int index)` | `Future<void>` | Remove o item `index` da fila exibida; não remove a faixa atual |
 | `moveInQueue(int from, int to)` | `Future<void>` | Move um item da fila; sem efeito com shuffle ligado |
-| `playSong(Song, {List<Song>? playlist})` | `Future<void>` | Monta fila a partir de `playlist` (ou `songs` atual) e inicia reprodução a partir de `song`; faixa que falha é pulada e vira mensagem em `errors` (via `HammmAudioHandler.failures`) |
+| `playSong(Song, {List<Song>? playlist})` | `Future<void>` | Monta fila a partir de `playlist` (ou `songs` atual) e inicia reprodução a partir de `song`; faixa que falha é pulada e vira mensagem em `errors` (via `DroidAudioHandler.failures`) |
 | `togglePlayPause()` | `Future<void>` | Alterna play/pause |
 | `skipNext()` / `skipPrevious()` | `Future<void>` | Navega na fila; `skipPrevious` reinicia a faixa atual se ela já passou de 3 s |
 | `seekTo(double value)` | `Future<void>` | Seek proporcional (0.0–1.0) sobre a duração atual |
@@ -72,7 +72,7 @@ A "API pública" real deste projeto é a **superfície de métodos do `PlayerPro
 
 Todos os métodos que alteram estado chamam `notifyListeners()` (exceto posição e contagem do sleep timer, ver acima) — o contrato de "resposta" desta API é reatividade via `ChangeNotifier`, não retorno de valor estruturado (a maioria retorna `Future<void>`).
 
-## Superfície pública de `HammmAudioHandler` (`services/audio_handler.dart`)
+## Superfície pública de `DroidAudioHandler` (`services/audio_handler.dart`)
 
 Implementa a interface `AudioHandler` do pacote `audio_service` (usada pelo sistema operacional Android para expor controles de mídia na notificação/tela de bloqueio). Ver [modules.md](./modules.md) para detalhamento.
 

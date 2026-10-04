@@ -105,7 +105,7 @@ class _QueueScreenState extends State<QueueScreen> {
                         },
                       );
                       // A faixa atual não pode ser removida (ver
-                      // `HammmAudioHandler.removeQueueItemAt`).
+                      // `DroidAudioHandler.removeQueueItemAt`).
                       if (isCurrent) {
                         return KeyedSubtree(key: ValueKey(item.id), child: tile);
                       }

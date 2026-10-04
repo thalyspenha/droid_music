@@ -29,19 +29,19 @@ Future<void> main() async {
   runApp(
     ChangeNotifierProvider(
       create: (_) => PlayerProvider(audioHandler),
-      child: const HammmApp(),
+      child: const DroidMusicApp(),
     ),
   );
 }
 
-class HammmApp extends StatefulWidget {
-  const HammmApp({super.key});
+class DroidMusicApp extends StatefulWidget {
+  const DroidMusicApp({super.key});
 
   @override
-  State<HammmApp> createState() => _HammmAppState();
+  State<DroidMusicApp> createState() => _DroidMusicAppState();
 }
 
-class _HammmAppState extends State<HammmApp> with WidgetsBindingObserver {
+class _DroidMusicAppState extends State<DroidMusicApp> with WidgetsBindingObserver {
   final _messengerKey = GlobalKey<ScaffoldMessengerState>();
   StreamSubscription<String>? _errorsSub;
 
@@ -83,7 +83,7 @@ class _HammmAppState extends State<HammmApp> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Hammm',
+      title: 'Droid Music',
       debugShowCheckedModeBanner: false,
       scaffoldMessengerKey: _messengerKey,
       theme: AppTheme.dark,

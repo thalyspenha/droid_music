@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hammm_music/models/song.dart';
+import 'package:droid_music/models/song.dart';
 
 void main() {
   group('Song', () {
